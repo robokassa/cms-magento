@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <astrio_robokassa>
+                <hash_algorithm><![CDATA[MD5]]></hash_algorithm>
+                <result_url><![CDATA[http(s)://your-domain.ru/robokassa/checkout/result/]]></result_url>
+                <success_url><![CDATA[http(s)://your-domain.ru/robokassa/checkout/success/]]></success_url>
+                <fail_url><![CDATA[http(s)://your-domain.ru/robokassa/checkout/failure/]]></fail_url>
+                <active>0</active>
+                <title>Robokassa</title>
+                <description>Online payment Robokassa</description>
+                <model>Astrio\Robokassa\Model\Payment\Method\Robokassa</model>
+                <production_mode>0</production_mode>
+                <password_1 backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <password_2 backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <test_password_1 backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <test_password_2 backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <culture>ru</culture>
+                <order_status>processing</order_status>
+                <payment_action>custom</payment_action>
+                <allowspecific>0</allowspecific>
+                <sort_order>2</sort_order>
+                <fiscalization>
+                    <active>0</active>
+                    <sno>0</sno>
+                    <payment_method>0</payment_method>
+                    <payment_object>0</payment_object>
+                    <tax>none</tax>
+                </fiscalization>
+            </astrio_robokassa>
+        </payment>
+    </default>
+</config>

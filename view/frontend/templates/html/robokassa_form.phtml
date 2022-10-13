@@ -1,0 +1,26 @@
+<?php /** @var \Astrio\Robokassa\Block\Widget\Redirect $block */?>
+<?php $postData = $block->getPostData();?>
+
+<form action="<?= $block->getRobokassaApiUrl();?>"
+      method="POST"
+      id="robokassa_payment_form"
+      style="display: none"
+>
+    <?php if (!is_null($postData)): ?>
+        <?php foreach ($postData as $name => $value): ?>
+            <input type="hidden" name="<?php echo $block->escapeHtml($name); ?>"
+                   value="<?php echo $block->escapeHtml($value); ?>"/>
+        <?php endforeach; ?>
+    <?php endif; ?>
+    <input type="submit" value="submit" />
+</form>
+
+<script type="text/javascript">
+
+    require(["jquery"], function ($) {
+        $(document).ready( function() {
+            $('#robokassa_payment_form').submit();
+        });
+    });
+
+</script>
