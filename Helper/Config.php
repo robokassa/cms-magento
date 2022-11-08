@@ -26,8 +26,7 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     protected $secondCheckPaymentMethods = [
         'full_prepayment',
         'prepayment',
-        'advance',
-        'full_payment'
+        'advance'
     ];
 
     /**
