@@ -77,6 +77,6 @@ Magento 2.4.X Enterprise и Community.
 ### Changelog
 = 1.0.1 =
 * Изменен "Признак способа расчёта" = "Полный расчет" во втором чеке при выборе:
-    * "Признак способа расчёта" (payment_method) = "Предоплпта 100%" (Prepayment 100%)
-    * "Признак способа расчёта" (payment_method) = "Предоплпта" (Prepayment)
+    * "Признак способа расчёта" (payment_method) = "Предоплата 100%" (Prepayment 100%)
+    * "Признак способа расчёта" (payment_method) = "Предоплата" (Prepayment)
     * "Признак способа расчёта" (payment_method) = "Аванс" (Advance)
