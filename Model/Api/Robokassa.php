@@ -56,7 +56,7 @@ class Robokassa
             'operation' => 'sell',
             'url' => urlencode($this->robokassaConfig->getSiteUrl()),
             'total' => round($order->getBaseGrandTotal(), 2),
-            'items' => $this->receiptConverter->getReceiptItems($order),
+            'items' => $this->receiptConverter->getReceiptItems($order, true),
             'payments' => [
                 [
                     'type' => 2,

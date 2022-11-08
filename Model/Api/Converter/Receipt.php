@@ -38,11 +38,12 @@ class Receipt
         return $receipt;
     }
 
-    public function getReceiptItems(\Magento\Sales\Model\Order $order)
+    public function getReceiptItems(\Magento\Sales\Model\Order $order, $isSecondCheck = false)
     {
         $receiptItems = [];
 
-        $paymentMethod = $this->robokassaConfig->getFiscalizationPaymentMethod($order->getStoreId());
+        $paymentMethod = $isSecondCheck ?
+            'full_payment' : $this->robokassaConfig->getFiscalizationPaymentMethod($order->getStoreId());
         $paymentObject = $this->robokassaConfig->getFiscalizationPaymentObject($order->getStoreId());
         $tax = $this->robokassaConfig->getFiscalizationTax($order->getStoreId());
 
