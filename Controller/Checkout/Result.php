@@ -48,7 +48,7 @@ class Result extends \Astrio\Robokassa\Controller\AbstractController
             $order = $this->orderRepository->get($requestData['InvId']);
 
             $password2 = $this->robokassaConfig->getPassword2();
-            $grandTotal = round($order->getBaseGrandTotal(), 2);
+            $grandTotal = round($order->getGrandTotal(), 2);
             $invId = $order->getId();
             $signatureValue = implode(':', [sprintf("%.6f", $grandTotal), $invId, $password2]);
             $signatureValue = md5($signatureValue);

@@ -10,6 +10,7 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     const XML_PATH_ROBOKASSA_ACTIVE = 'payment/astrio_robokassa/active';
     const XML_PATH_ROBOKASSA_DESCRIPTION = 'payment/astrio_robokassa/description';
     const XML_PATH_ROBOKASSA_MODE = 'payment/astrio_robokassa/mode';
+    const XML_PATH_ROBOKASSA_PAYMENT_MODE = 'payment/astrio_robokassa/payment_mode';
     const XML_PATH_ROBOKASSA_MERCHANT_LOGIN = 'payment/astrio_robokassa/merchant_login';
     const XML_PATH_ROBOKASSA_PASSWORD_1 = 'payment/astrio_robokassa/password_1';
     const XML_PATH_ROBOKASSA_PASSWORD_2 = 'payment/astrio_robokassa/password_2';
@@ -22,6 +23,7 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     const XML_PATH_ROBOKASSA_FISCALIZATION_PAYMENT_METHOD = 'payment/astrio_robokassa/fiscalization/payment_method';
     const XML_PATH_ROBOKASSA_FISCALIZATION_PAYMENT_OBJECT = 'payment/astrio_robokassa/fiscalization/payment_object';
     const XML_PATH_ROBOKASSA_FISCALIZATION_TAX = 'payment/astrio_robokassa/fiscalization/tax';
+    
 
     protected $secondCheckPaymentMethods = [
         'full_prepayment',
@@ -254,5 +256,14 @@ class Config extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->isFiscalizationEnabled($storeId) &&
             in_array($this->getFiscalizationPaymentMethod($storeId), $this->secondCheckPaymentMethods);
+    }
+
+    public function isStepByStepPayment($storeId = null)
+    {
+        return $this->scopeConfig->getValue(
+            self::XML_PATH_ROBOKASSA_PAYMENT_MODE,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE,
+            $storeId
+        ) == 1;
     }
 }

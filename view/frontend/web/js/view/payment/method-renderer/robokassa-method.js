@@ -1,9 +1,10 @@
 define(
     [
         'Magento_Checkout/js/view/payment/default',
+        'Magento_Checkout/js/action/redirect-on-success',
         'mage/url'
     ],
-    function (Component, url) {
+    function (Component, redirectOnSuccessAction, url) {
         'use strict';
         return Component.extend({
             defaults: {
@@ -11,7 +12,10 @@ define(
                 redirectAfterPlaceOrder: false
             },
             afterPlaceOrder: function (data, event) {
-                window.location.replace(url.build('robokassa/onepage/success'));
+                redirectOnSuccessAction.redirectUrl = url.build('robokassa/onepage/success');
+                this.redirectAfterPlaceOrder = true
+
+                // window.location.replace(url.build('robokassa/onepage/success'));
             }
         });
     }
