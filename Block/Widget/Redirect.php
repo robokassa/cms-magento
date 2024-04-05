@@ -65,19 +65,20 @@ class Redirect extends \Magento\Framework\View\Element\Template
      */
     public function getPostData()
     {
-        $order = $this->checkoutSession->getLastRealOrder();
+        $order         = $this->checkoutSession->getLastRealOrder();
         $merchantLogin = $this->robokassaConfig->getMerchantLogin();
-        $password1 = $this->robokassaConfig->getPassword1();
-        $grandTotal = round($order->getBaseGrandTotal(), 2);
-        $invId = $order->getId();
-        $description = $this->robokassaConfig->getDescription($order->getStoreId()) ?? '';
+        $password1     = $this->robokassaConfig->getPassword1();
+        // $grandTotal    = round($order->getBaseGrandTotal(), 2);
+        $grandTotal    = round($order->getGrandTotal(), 2);
+        $invId         = $order->getId();
+        $description   = $this->robokassaConfig->getDescription($order->getStoreId()) ?? '';
 
         $data = [
             'MerchantLogin' => $merchantLogin,
-            'OutSum' => $grandTotal,
-            'InvId' => $invId,
-            'Description' => $description,
-            'Culture' => $this->robokassaConfig->getCulture($order->getStoreId())
+            'OutSum'        => $grandTotal,
+            'InvId'         => $invId,
+            'Description'   => $description,
+            'Culture'       => $this->robokassaConfig->getCulture($order->getStoreId())
 //            'Shp_item' => '',
 //            'IncCurrLabel' => 'BANKOCEAN2R',
 
@@ -93,15 +94,23 @@ class Redirect extends \Magento\Framework\View\Element\Template
             // В запросе result присылаются значения уже конвертированные
             // из-за чего возникают проблемы с проверкой суммы оплаты из-за разницы в конвертации магенты и робокассы.
             in_array($outSumCurrency, \Astrio\Robokassa\Model\Payment\Method\Robokassa::AVAILABLE_OUT_SUM_CURRENCIES)) {
-            $outSumCurrency = $order->getOrderCurrencyCode();
-            $signatureArray[] = $outSumCurrency;
+            $outSumCurrency         = $order->getOrderCurrencyCode();
+            $signatureArray[]       = $outSumCurrency;
             $data['OutSumCurrency'] = $outSumCurrency;
         }
 
         if ($this->robokassaConfig->isFiscalizationEnabled()) {
-            $receipt = $this->receiptConverter->getReceipt($order);
-            $data['Receipt'] = urlencode($receipt);
+            $receipt          = $this->receiptConverter->getReceipt($order);
+            $data['Receipt']  = urlencode($receipt);
             $signatureArray[] = $receipt;
+        }
+
+        if ($this->robokassaConfig->isStepByStepPayment()) {
+            $data['StepByStep']  = 'true';
+            $data['ResultUrl2'] = 'https://'. $_SERVER['HTTP_HOST'] .'/robokassa/checkout/hold/';
+
+            $signatureArray[] = $data['StepByStep'];
+            $signatureArray[] = $data['ResultUrl2'];
         }
 
         $signatureArray[] = $password1;
@@ -110,6 +119,7 @@ class Redirect extends \Magento\Framework\View\Element\Template
         if (!$this->robokassaConfig->getMode()) {
             $data['IsTest'] = 1;
         }
+
         return $data;
     }
 

@@ -5,7 +5,8 @@
   "type": "magento2-module",
   "require": {
     "magento/framework": "*",
-    "magento/module-payment": "100.4.*"
+    "magento/module-payment": "100.4.*",
+    "gamegos/jws": "~1.0"
   },
   "license": [
     "Proprietary"

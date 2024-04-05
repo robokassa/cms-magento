@@ -28,6 +28,10 @@
                 <field id="description" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Description</label>
                 </field>
+                <field id="payment_mode" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="0">
+                    <label>Payment mode</label>
+                    <source_model>Astrio\Robokassa\Model\Config\Source\PaymentMode</source_model>
+                </field>
                 <field id="mode" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="0">
                     <label>Mode</label>
                     <source_model>Astrio\Robokassa\Model\Config\Source\Mode</source_model>
