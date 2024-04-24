@@ -77,7 +77,7 @@ class Redirect extends \Magento\Framework\View\Element\Template
             'MerchantLogin' => $merchantLogin,
             'OutSum'        => $grandTotal,
             'InvId'         => $invId,
-            'Description'   => $description,
+            'Description'   => $description .', # '. $invId,
             'Culture'       => $this->robokassaConfig->getCulture($order->getStoreId())
 //            'Shp_item' => '',
 //            'IncCurrLabel' => 'BANKOCEAN2R',
