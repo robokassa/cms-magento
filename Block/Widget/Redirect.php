@@ -73,6 +73,16 @@ class Redirect extends \Magento\Framework\View\Element\Template
         $invId         = $order->getId();
         $description   = $this->robokassaConfig->getDescription($order->getStoreId()) ?? '';
 
+        if (preg_match('/#.*#/', $description)) {
+            $replace = [
+                '#ORDER_ID#' => $order->getIncrementId(),
+            ];
+
+            $description = str_replace(array_keys($replace), array_values($replace), $description);
+        } else {
+            $description .= ($description ? ', ' : '') . ' Номер заказа '. $order->getIncrementId();
+        }
+
         $data = [
             'MerchantLogin' => $merchantLogin,
             'OutSum'        => $grandTotal,
