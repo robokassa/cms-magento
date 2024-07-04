@@ -89,6 +89,7 @@ class Redirect extends \Magento\Framework\View\Element\Template
             'InvId'         => $invId,
             'Description'   => $description,
             'Culture'       => $this->robokassaConfig->getCulture($order->getStoreId())
+            'Shp_label'     => 'magento_official',
 //            'Shp_item' => '',
 //            'IncCurrLabel' => 'BANKOCEAN2R',
 
@@ -124,6 +125,8 @@ class Redirect extends \Magento\Framework\View\Element\Template
         }
 
         $signatureArray[] = $password1;
+        $signatureArray[] = 'Shp_label=magento_official';
+
         $data['SignatureValue'] = md5(implode(':', $signatureArray));
 
         if (!$this->robokassaConfig->getMode()) {
