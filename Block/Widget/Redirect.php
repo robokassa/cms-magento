@@ -125,6 +125,8 @@ class Redirect extends \Magento\Framework\View\Element\Template
         }
 
         $signatureArray[] = $password1;
+        $signatureArray[] = 'Shp_label=magento_official';
+
         $data['SignatureValue'] = md5(implode(':', $signatureArray));
 
         if (!$this->robokassaConfig->getMode()) {
