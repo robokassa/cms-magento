@@ -88,7 +88,7 @@ class Redirect extends \Magento\Framework\View\Element\Template
             'OutSum'        => $grandTotal,
             'InvId'         => $invId,
             'Description'   => $description,
-            'Culture'       => $this->robokassaConfig->getCulture($order->getStoreId())
+            'Culture'       => $this->robokassaConfig->getCulture($order->getStoreId()),
             'Shp_label'     => 'magento_official',
 //            'Shp_item' => '',
 //            'IncCurrLabel' => 'BANKOCEAN2R',
