@@ -44,12 +44,10 @@ class Success extends \Astrio\Robokassa\Controller\AbstractController
             $order = $this->orderRepository->get($requestData['InvId']);
 
             /** @var \Magento\Sales\Model\Order\Payment $payment */
-            $payment = $order->getPayment();
-
-            $payment->setIsTransactionClosed(false);
-            $payment->capture();
-
-            $this->orderRepository->save($order);
+            // $payment = $order->getPayment();
+            // $payment->setIsTransactionClosed(false);
+            // $payment->capture();
+            // $this->orderRepository->save($order);
 
             $quoteId = $order->getQuoteId();
             if ($quoteId) {
