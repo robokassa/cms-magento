@@ -50,7 +50,7 @@ class Result extends \Astrio\Robokassa\Controller\AbstractController
             $password2 = $this->robokassaConfig->getPassword2();
             $grandTotal = round($order->getGrandTotal(), 2);
             $invId = $order->getId();
-            $signatureValue = implode(':', [$grandTotal, $invId, $password2, 'Shp_label=magento_official']);
+            $signatureValue = implode(':', [sprintf("%.6f", $grandTotal), $invId, $password2, 'Shp_label=magento_official']);
             $signatureValue = md5($signatureValue);
 
             if (strtoupper($requestData['SignatureValue']) != strtoupper($signatureValue)) {
