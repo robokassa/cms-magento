@@ -12,6 +12,10 @@ class Tax implements \Magento\Framework\Data\OptionSourceInterface
         'vat110' => 'VAT check at the estimated rate 10/110',
         'vat20' => 'VAT check at a rate of 20%',
         'vat120' => 'VAT check at the estimated rate of 20/120',
+        'vat5' => 'VAT at 5%',
+        'vat7' => 'VAT at 7%',
+        'vat105' => 'VAT check at the estimated rate 5/105',
+        'vat107' => 'VAT check at the estimated rate 7/107',
     ];
 
     /**
